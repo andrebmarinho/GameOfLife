@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="top"
+    android:orientation="horizontal" >
+
+    <GridView
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="382dp"
+        android:layout_weight="0.92"
+        android:columnWidth="50dp"
+        android:gravity="center"
+        android:numColumns="10"
+        android:stretchMode="columnWidth" >
+    </GridView>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_weight="0.11"
+        layout="@layout/botoes"
+        android:gravity="bottom" />
+
+</LinearLayout>

@@ -1,0 +1,53 @@
+package ui;
+
+import java.util.ArrayList;
+
+import com.example.gameoflife.R;
+
+import android.app.Activity;
+import android.content.ClipData.Item;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+
+public class GameViewActivity extends Activity {
+
+	 @Override
+     public void onCreate(Bundle savedInstanceState) {         
+
+        super.onCreate(savedInstanceState);    
+        setContentView(R.layout.main_game_view);
+         
+        GridView gridView = (GridView) findViewById(R.id.view);  
+        
+        gridView.setAdapter();
+        
+    }
+	
+}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View row = convertView;
+		RecordHolder holder = null;
+	
+		if (row == null) {
+			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+			row = inflater.inflate(layoutResourceId, parent, false);
+	
+			holder = new RecordHolder();
+			holder.txtTitle = (TextView) row.findViewById(R.id.item_text);
+			holder.imageItem = (ImageView) row.findViewById(R.id.item_image);
+			row.setTag(holder);
+		} else {
+			holder = (RecordHolder) row.getTag();
+		}
+	
+		Item item = data.get(position);
+		holder.txtTitle.setText(item.getTitle());
+		holder.imageItem.setImageBitmap(item.getImage());
+		return row;
+	
+	}

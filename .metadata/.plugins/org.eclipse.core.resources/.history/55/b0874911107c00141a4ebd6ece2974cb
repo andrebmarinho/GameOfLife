@@ -1,0 +1,20 @@
+package ui;
+
+import com.example.gameoflife.R;
+
+public class ImgSwitch {
+
+	private Integer[] arrayDeImgs = { 
+    		R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead, R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead,
+    		R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead, R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead,
+    		R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead, R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead,
+    		R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead, R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead,
+    		R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead, R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead,
+    		R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead, R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead,
+    		R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead, R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead,
+    		R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead, R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead,
+    		R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead, R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead,
+    		R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead, R.drawable.alive, R.drawable.dead , R.drawable.dead, R.drawable.dead, R.drawable.dead
+    };
+	
+}

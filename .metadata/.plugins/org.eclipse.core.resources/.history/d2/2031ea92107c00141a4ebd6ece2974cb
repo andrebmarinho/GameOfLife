@@ -1,0 +1,20 @@
+package ui;
+
+//Singleton responsável pelas mudanças das imagens.
+
+import com.example.gameoflife.R;
+
+public class ImgSwitch {
+
+	private static Integer[] arrayDeImgs;
+	
+	private static AmbienteAvaliacao instance;
+	
+	public static AmbienteAvaliacao instance() {
+		if(instance == null) {
+			instance = new AmbienteAvaliacao();
+		}
+		return instance; 
+	}
+	
+}

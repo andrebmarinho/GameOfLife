@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="top"
+    android:orientation="horizontal" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/botoes" />
+
+    <GridView
+        android:id="@+id/view"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:columnWidth="50dp"
+        android:gravity="center"
+        android:numColumns="10"
+        android:stretchMode="columnWidth" >
+    </GridView>
+
+</LinearLayout>

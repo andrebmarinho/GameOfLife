@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">Game of Life</string>
+    <string name="desc"/>
+    <string name="auto">Automatico</string>
+    <string name="pause">Pause</string>
+    <string name="prox">Proximo</string>
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
+
+</resources>
+
