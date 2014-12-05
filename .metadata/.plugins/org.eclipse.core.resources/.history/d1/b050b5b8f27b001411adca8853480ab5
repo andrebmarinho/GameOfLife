@@ -1,7 +1,0 @@
-package ui;
-
-import android.app.Activity;
-
-public class GameView extends Activity {
-
-}

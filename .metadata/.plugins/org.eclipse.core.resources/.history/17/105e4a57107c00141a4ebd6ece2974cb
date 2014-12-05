@@ -1,9 +1,0 @@
-package ui;
-
-import com.example.gameoflife.R;
-
-public class ImgSwitch {
-
-	private static Integer[] arrayDeImgs;
-	
-}
