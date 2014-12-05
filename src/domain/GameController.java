@@ -12,8 +12,10 @@ import java.security.InvalidParameterException;
 public class GameController {
 
 	private GameEngine engine;
-	//private GameView board;
+	private boolean update;
 	private Statistics statistics;
+	//private boolean pause = false;
+	//private boolean auto = true;	
 	
 	public GameEngine getEngine() {
 		return engine;
@@ -22,26 +24,20 @@ public class GameController {
 	public void setEngine(GameEngine engine) {
 		this.engine = engine;
 	}
-	
-//	public GameView getBoard() {
-//		return board;
-//	}
-//	
-//	public void setBoard(GameView board) {
-//		this.board = board;
-//	}
-	
+		
 	public void setStatistics(Statistics statistics) {
 		this.statistics = statistics;
 	}
 	
 	public void start() {
-		//board.update();
+		update = false;
+		nextGeneration();
 	}
 	
 	public void halt() {
 		//oops, nao muito legal fazer sysout na classe Controller
 		//System.out.println("\n \n");
+		//TODO: display de estatística
 		statistics.display();
 		System.exit(0);
 	}
@@ -49,16 +45,41 @@ public class GameController {
 	public void makeCellAlive(int i, int j) {
 		try {
 			engine.makeCellAlive(i, j);
-			//board.update();
+			checkCellsPositions(engine.getCells());
 		}
 		catch(InvalidParameterException e) {
-			System.out.println(e.getMessage());
+			//TODO:tratar aqui System.out.println(e.getMessage());
 		}
 	}
 	
 	public void nextGeneration() {
 		engine.nextGeneration();
-		//board.update();
+		checkCellsPositions(engine.getCells());
+	}
+
+	public void setUpdate(boolean update) {
+		this.update = update;
+	}
+	
+	public boolean getUpdate() {
+		return update;
+	}
+	
+	//Comunicação: controller recebe as informações da engine 
+	//e prepara a view para ser atualizada.
+	public void checkCellsPositions(Cell[][] oldCells){
+		
+		int position;
+		Cell[][] cells = engine.getCells();
+		for(int i = 0; i < 10; i++)
+			for(int j = 0; j < 10; j++){				
+				if(oldCells[i][j] != cells[i][j]){
+					position = engine.convertCoordinatesToPosition(i, j);
+					ImgSwitch.instance().setImgArray(cells[i][j].getStatus(), position);
+					update = true;
+				}				
+			}		
+		
 	}
 	
 }

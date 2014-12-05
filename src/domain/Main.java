@@ -1,22 +1,46 @@
 package domain;
 
-//import ui.GameView;
-
 public class Main {
 
-	public static void main(String args[]) {
-		GameController controller = new GameController();
-		
-		Statistics statistics = new Statistics();
-		
-		GameEngine engine = new GameEngine(10, 10, statistics);	
-		
-		//GameView board = new GameView(controller, engine);
-		
-		//controller.setBoard(board);
-		controller.setEngine(engine);
-		controller.setStatistics(statistics);
-		
+	Statistics statistics;
+	GameController controller;
+	GameEngine engine;
+	
+	private static Main instance;
+	
+	public static Main instance() {
+		if(instance == null) {
+			instance = new Main();
+		}
+		return instance; 
+	}
+	
+	private Main(){		
+	}
+	
+	public void startGame() {
+		setUp();
 		controller.start();
 	}
+
+	public void setUp() {
+		controller = new GameController();		
+		statistics = new Statistics();		
+		engine = new GameEngine(10, 10, statistics);
+		controller.setEngine(engine);
+		controller.setStatistics(statistics);
+	}
+
+	public Statistics getStatistics() {
+		return statistics;
+	}
+
+	public GameController getController() {
+		return controller;
+	}
+
+	public GameEngine getEngine() {
+		return engine;
+	}
+	
 }

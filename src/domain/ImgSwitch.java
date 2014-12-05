@@ -7,7 +7,7 @@ import com.example.gameoflife.R;
 
 public class ImgSwitch {
 
-	private static Integer[] arrayDeImgs = new Integer[100];
+	private static Integer[] imgArray = new Integer[100];
 	
 	private static ImgSwitch instance;
 	
@@ -21,28 +21,28 @@ public class ImgSwitch {
 	//Início com mapa zerado.
 	private ImgSwitch() {
 		for(int i = 0; i < 100; i++)
-			arrayDeImgs[i] = R.drawable.alive;
+			imgArray[i] = R.drawable.empty;
 		
 	}
 	
-	//x e y pertencem a [0 ,9]
-	public void setArrayDeImgs(Estados estado, int x, int y){
-		int index = (x+1) + y * 10;
-		
-		switch(estado){
-			case Morto:
-				arrayDeImgs[index] = R.drawable.dead;
-			case Vivo:
-				arrayDeImgs[index] = R.drawable.alive;
-			case Vazio:
-				arrayDeImgs[index] = R.drawable.empty;
-		
+	public void setImgArray(Status status, int position){
+				
+		switch(status){
+			case Dead:
+				imgArray[position] = R.drawable.dead;
+				break;
+			case Alive:
+				imgArray[position] = R.drawable.alive;
+				break;
+			case Empty:
+				imgArray[position] = R.drawable.empty;
+				break;
 		}
 		
 	}
 
-	public Integer[] getArrayDeImgs() {
-		return arrayDeImgs;
+	public Integer[] getImgArray() {
+		return imgArray;
 	}	
 	
 }

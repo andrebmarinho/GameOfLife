@@ -193,4 +193,8 @@ public class GameEngine {
 	public void setWidth(int width) {
 		this.width = width;
 	}
+
+	public int convertCoordinatesToPosition(int i, int j) {
+		return (i*10 + (j+1));
+	}
 }

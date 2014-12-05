@@ -4,22 +4,25 @@ package ui;
 
 import com.example.gameoflife.R;
 
-import domain.AdaptadorDeImgs;
-import domain.Estados;
+import domain.ImgAdapter;
+import domain.ImgSwitch;
+import domain.Main;
+import domain.Status;
 import domain.GameController;
-import domain.GameEngine;
-import domain.Statistics;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.GridView;
 
 public class MainActivity extends Activity {
 
-	Statistics statistics;
+	Status status;
+	GridView gridView;
+	ImgAdapter adapter;
 	GameController controller;
-	GameEngine engine;
-	Estados est;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {         
@@ -27,26 +30,38 @@ public class MainActivity extends Activity {
        super.onCreate(savedInstanceState);    
        setContentView(R.layout.main_game_view);
          
-       GridView gridView = (GridView) findViewById(R.id.view);       
-       gridView.setAdapter(new AdaptadorDeImgs(this));
+       gridView = (GridView) findViewById(R.id.view); 
+       adapter = new ImgAdapter(this);
+       gridView.setAdapter(adapter);
        
-       iniciarJogo();
+       Main.instance().startGame();
+       
+       gridView.setOnTouchListener(new OnTouchListener() {
+           @SuppressLint("ClickableViewAccessibility") public boolean onTouch(View v, MotionEvent me) {
+               
+               int position = gridView.pointToPosition((int) me.getX(), (int) me.getY());
+               ImgSwitch.instance().setImgArray(Status.Alive, position); 
+               updateView();
+               return true;
+           }
+		
+       });
+       
+       
+     //Isso na verdade vai no loop infinito do jogo.
+       /*controller = Main.instance().getController();
+       
+       if (controller.getUpdate())
+			updateView();*/
+       
+       
        
     }
-
-	private void iniciarJogo() {
-		setUp();
-		controller.start();		
+	
+	private void updateView() {
+		adapter.notifyDataSetChanged();
 	}
-
-	private void setUp() {
-		controller = new GameController();		
-		statistics = new Statistics();		
-		engine = new GameEngine(10, 10, statistics);
-		controller.setEngine(engine);
-		controller.setStatistics(statistics);
-	}
-	 
+		 
 }
 
 

@@ -1,18 +1,23 @@
 package domain;
 
 public class Cell {
-	private boolean alive = false;
+	private Status status = Status.Empty; 
 
 	public boolean isAlive() {
-		return alive;
+		return status == Status.Alive;
 	}
 
 	public void kill() {
-		this.alive = false;
+		this.status = Status.Dead;
 	}
 	
 	public void revive() {
-		this.alive = true;
+		this.status = Status.Alive;
 	}
+
+	public Status getStatus() {
+		return status;
+	}	
+	
 }
 
