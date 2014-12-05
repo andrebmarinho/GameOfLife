@@ -37,7 +37,7 @@ public class GameController {
 	public void halt() {
 		//oops, nao muito legal fazer sysout na classe Controller
 		//System.out.println("\n \n");
-		//TODO: display de estatística
+		//TODO: display de estatísticas
 		statistics.display();
 		System.exit(0);
 	}
@@ -45,16 +45,15 @@ public class GameController {
 	public void makeCellAlive(int i, int j) {
 		try {
 			engine.makeCellAlive(i, j);
-			checkCellsPositions(engine.getCells());
-		}
-		catch(InvalidParameterException e) {
-			//TODO:tratar aqui System.out.println(e.getMessage());
+		} catch(InvalidParameterException e) {
+			//TODO:tratar aqui 
 		}
 	}
 	
 	public void nextGeneration() {
+		update = false;
 		engine.nextGeneration();
-		checkCellsPositions(engine.getCells());
+		changeCellsStatus(engine.getCells());
 	}
 
 	public void setUpdate(boolean update) {
@@ -64,17 +63,15 @@ public class GameController {
 	public boolean getUpdate() {
 		return update;
 	}
-	
-	//Comunicação: controller recebe as informações da engine 
-	//e prepara a view para ser atualizada.
-	public void checkCellsPositions(Cell[][] oldCells){
+			
+	public void changeCellsStatus(Cell[][] oldCells){
 		
 		int position;
 		Cell[][] cells = engine.getCells();
 		for(int i = 0; i < 10; i++)
 			for(int j = 0; j < 10; j++){				
-				if(oldCells[i][j] != cells[i][j]){
-					position = engine.convertCoordinatesToPosition(i, j);
+				if(oldCells[i][j].getStatus() != cells[i][j].getStatus()){
+					position = ImgSwitch.instance().convertCoordinatesToPosition(i, j);
 					ImgSwitch.instance().setImgArray(cells[i][j].getStatus(), position);
 					update = true;
 				}				
