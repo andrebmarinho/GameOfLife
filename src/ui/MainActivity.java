@@ -35,21 +35,27 @@ public class MainActivity extends Activity {
        gridView.setAdapter(adapter);
        
        Main.instance().startGame();
-       controller = Main.instance().getController();
        
        gridView.setOnTouchListener(new OnTouchListener() {
            @SuppressLint("ClickableViewAccessibility") public boolean onTouch(View v, MotionEvent me) {
                
-        	   int x = (int) me.getX();
-        	   int y = (int) me.getY();               
-               int[] coord = ImgSwitch.instance().convertPositionToCoordinates( gridView.pointToPosition(x, y) );
-               controller.makeCellAlive(coord[0], coord[1]);
+               int position = gridView.pointToPosition((int) me.getX(), (int) me.getY());
+               ImgSwitch.instance().setImgArray(Status.Alive, position); 
                updateView();
                return true;
            }
 		
        });
-              
+       
+       
+     //Isso na verdade vai no loop infinito do jogo.
+       /*controller = Main.instance().getController();
+       
+       if (controller.getUpdate())
+			updateView();*/
+       
+       
+       
     }
 	
 	private void updateView() {

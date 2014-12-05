@@ -45,17 +45,4 @@ public class ImgSwitch {
 		return imgArray;
 	}	
 	
-	public int convertCoordinatesToPosition(int i, int j) {
-		return (i*10 + (j));		
-	}
-	
-	public int[] convertPositionToCoordinates(int pos) {
-		int[] coord = new int[ 2 ];
-		
-		coord[0] = (int) (pos/10);
-		coord[1] = pos % 10;
-		
-		return coord;		
-	}
-	
 }

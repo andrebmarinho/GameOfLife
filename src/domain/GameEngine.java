@@ -94,8 +94,6 @@ public class GameEngine {
 		if(validPosition(i, j)) {
 			cells[i][j].revive();
 			statistics.recordRevive();
-			int position = ImgSwitch.instance().convertCoordinatesToPosition(i, j);
-			ImgSwitch.instance().setImgArray(Status.Alive, position);			
 		}
 		else {
 			new InvalidParameterException("Invalid position (" + i + ", " + j + ")" );
@@ -195,5 +193,8 @@ public class GameEngine {
 	public void setWidth(int width) {
 		this.width = width;
 	}
-	
+
+	public int convertCoordinatesToPosition(int i, int j) {
+		return (i*10 + (j+1));
+	}
 }
