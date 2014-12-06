@@ -27,7 +27,7 @@
         android:contentDescription="@string/desc" />
     
     <ImageButton
-        android:id="@+id/b_prox"
+        android:id="@+id/b_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/step"
