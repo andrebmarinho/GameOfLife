@@ -1,5 +1,7 @@
 package domain;
 
+import domain.Statistics;
+
 /**
  * Essa tambem eh uma classe com baixa coesao, 
  * pois mustura caracteristicas de Model (as propriedades) 
@@ -10,14 +12,27 @@ package domain;
  * @author rodrigobonifacio
  */
 public class Statistics {
+	private static Statistics instance;
 	private int revivedCells;
 	private int killedCells;
 	
-	public Statistics() {
+	private Statistics() {
 		revivedCells = 0;
 		killedCells = 0;
 	}
-
+	
+	public static synchronized Statistics instance() {
+		if (instance == null) {
+			instance = new Statistics();
+		}
+		return instance;
+	}
+	
+	public void setStatistics(int revivedCells, int killedCells){
+		this.revivedCells = revivedCells;
+		this.killedCells = killedCells;
+	}
+	
 	public int getRevivedCells() {
 		return revivedCells;
 	}

@@ -4,16 +4,13 @@ import java.security.InvalidParameterException;
 
 /**
  * Classe que atua como um controlador do 
- * padrão MVC, separando os componentes da 
+ * padrï¿½o MVC, separando os componentes da 
  * camada de apresentacao e model. 
  * 
  * @author rbonifacio
  */
 public class GameController {
-
 	private GameEngine engine;
-	private Statistics statistics;
-	private boolean auto = false;	
 	
 	public GameEngine getEngine() {
 		return engine;
@@ -23,8 +20,8 @@ public class GameController {
 		this.engine = engine;
 	}
 		
-	public void setStatistics(Statistics statistics) {
-		this.statistics = statistics;
+	public void setStatistics(int revivedCells, int killedCells) {
+		Statistics.instance().setStatistics(revivedCells, killedCells);
 	}
 	
 	public void start() {
@@ -33,8 +30,8 @@ public class GameController {
 	public void halt() {
 		//oops, nao muito legal fazer sysout na classe Controller
 		//System.out.println("\n \n");
-		//TODO: display de estatísticas
-		statistics.display();
+		//TODO: display de estatï¿½sticas
+		Statistics.instance().display();
 		System.exit(0);
 	}
 	
@@ -66,15 +63,5 @@ public class GameController {
 					engine.setOldCells(oldCells);
 				}				
 			}		
-		
-	}
-
-	public boolean isAuto() {
-		return auto;
-	}
-
-	public void setAuto(boolean auto) {
-		this.auto = auto;
-	}
-	
+	}	
 }

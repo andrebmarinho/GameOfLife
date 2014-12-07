@@ -50,6 +50,7 @@ public class GameView {
 	}
 
 	private void printOptions() {
+		@SuppressWarnings("resource")
 		Scanner s = new Scanner(System.in);
 		int option;
 		System.out.println("\n \n");
@@ -74,6 +75,7 @@ public class GameView {
 	
 	private void makeCellAlive() {
 		int i, j = 0;
+		@SuppressWarnings("resource")
 		Scanner s = new Scanner(System.in);
 		
 		do {
