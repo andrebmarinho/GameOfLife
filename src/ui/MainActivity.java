@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 	protected static ImgAdapter adapter;
 	protected static GameController controller = null;
 	Buttons buttons;
-	Thread auto;
+	Thread auto = null;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {         
@@ -54,9 +54,8 @@ public class MainActivity extends Activity {
 	           return true;
 	       }
 		
-	   });
-	   auto = new Thread(new AutoRun());
-	       
+	   });	   
+	       	   
 	}
 	
 	private void setButtons() {
@@ -83,21 +82,29 @@ public class MainActivity extends Activity {
 		        		Toast.makeText(MainActivity.this, "Undo",
 							Toast.LENGTH_SHORT).show();
 		        	break;
+		        	
 			    case R.id.b_redo:
 			    	Toast.makeText(MainActivity.this, "Redo",
 							Toast.LENGTH_SHORT).show();
 			    	break;
+			    	
 			    case R.id.b_pause:
 			    	Toast.makeText(MainActivity.this, "Pause",
 							Toast.LENGTH_SHORT).show();
-			    	//((AutoRun) auto).turnOff();
 			    	auto.interrupt();
+			    	auto = null;
 			    	break;
+			    	
 			    case R.id.b_play:
 			    	Toast.makeText(MainActivity.this, "Play",
 							Toast.LENGTH_SHORT).show();
-			    	auto.start();			    	
+			    	
+			    	if(auto == null){
+			    		auto = new Thread(new AutoRun());
+			    		auto.start();
+			    	}
 			    	break;
+			    	
 			    case R.id.b_next:
 			    	Toast.makeText(MainActivity.this, "Next",
 							Toast.LENGTH_SHORT).show();
