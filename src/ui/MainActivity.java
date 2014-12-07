@@ -13,13 +13,16 @@ import domain.Status;
 import domain.GameController;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -73,6 +76,9 @@ public class MainActivity extends Activity {
 		buttons.getbNext().setOnClickListener(onClickListener);
 		buttons.getbUndo().setOnClickListener(onClickListener);
 		buttons.getbRedo().setOnClickListener(onClickListener);
+		
+		Button buttonStatistics = (Button) findViewById(R.id.ButtonStatistics);
+		buttonStatistics.setOnClickListener(onClickListener);
 	}
 
 	private OnClickListener onClickListener = new OnClickListener() {
@@ -97,20 +103,38 @@ public class MainActivity extends Activity {
 				break;
 			case R.id.b_next:
 				controller.nextGeneration();
-				Toast.makeText(
-						MainActivity.this,
-						"Criadas:" + Statistics.instance().getCreatedCells()
-								+ " Mortas:"
-								+ Statistics.instance().getKilledCells()
-								+ " Vivas:"
-								+ Statistics.instance().getRevivedCells(),
-						Toast.LENGTH_SHORT).show();
 				updateView();
+				break;
+			case R.id.ButtonStatistics:
+				showPopup();
 				break;
 			}
 		}
 	};
 
+	private void showPopup() {
+		 final Dialog dialog = new Dialog(MainActivity.this);
+         dialog.setContentView(R.layout.popup);
+         dialog.setTitle("Estatísticas");
+         dialog.setCancelable(true);
+         
+         TextView text = (TextView) dialog.findViewById(R.id.TextViewPopup);
+         text.setText("Criadas:" + Statistics.instance().getCreatedCells()
+					+ "\nMortas:"
+					+ Statistics.instance().getKilledCells()
+					+ "\nVivas:"
+					+ Statistics.instance().getRevivedCells());
+         
+         Button button = (Button) dialog.findViewById(R.id.ButtonClosePopup);
+         button.setOnClickListener(new OnClickListener() {
+         @Override
+             public void onClick(View v) {
+                 dialog.dismiss();
+             }
+         });
+         
+         dialog.show();
+	}
 	private void updateView() {
 		adapter.notifyDataSetChanged();
 	}

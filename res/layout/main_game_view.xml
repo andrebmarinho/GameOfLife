@@ -20,7 +20,12 @@
         android:gravity="top"
         android:numColumns="10"
         android:stretchMode="columnWidth" >
-
     </GridView>    
-
+    
+	<Button
+	    android:id="@+id/ButtonStatistics"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	    android:text="@string/show_statistics" />
 </LinearLayout>
