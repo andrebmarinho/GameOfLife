@@ -4,6 +4,7 @@ package ui;
 
 import com.example.gameoflife.R;
 
+import domain.AutoRun;
 import domain.Buttons;
 import domain.ImgAdapter;
 import domain.ImgSwitch;
@@ -26,8 +27,9 @@ public class MainActivity extends Activity {
 	Status status;
 	GridView gridView;
 	ImgAdapter adapter;
-	GameController controller;
+	protected GameController controller = null;
 	Buttons buttons;
+	Thread auto;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {         
@@ -53,6 +55,8 @@ public class MainActivity extends Activity {
 	       }
 		
 	   });
+	   if(controller != null)
+		   auto = new Thread(new AutoRun());
 	       
 	}
 	
@@ -87,12 +91,11 @@ public class MainActivity extends Activity {
 			    case R.id.b_pause:
 			    	Toast.makeText(MainActivity.this, "Pause",
 							Toast.LENGTH_SHORT).show();
-			    	controller.setAuto(false);
 			    	break;
 			    case R.id.b_play:
 			    	Toast.makeText(MainActivity.this, "Play",
 							Toast.LENGTH_SHORT).show();
-			    	controller.setAuto(true);
+			    	auto.start();			    	
 			    	break;
 			    case R.id.b_next:
 			    	Toast.makeText(MainActivity.this, "Next",
@@ -101,10 +104,11 @@ public class MainActivity extends Activity {
 			    	updateView();
 			        break;
 		    }
-	    }
+	    }	    
+	    
 	};
 		
-	private void updateView() {
+	protected void updateView() {
 		adapter.notifyDataSetChanged();
 	}
 			 
