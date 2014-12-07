@@ -99,7 +99,9 @@ public class MainActivity extends Activity {
 				controller.nextGeneration();
 				Toast.makeText(
 						MainActivity.this,
-						"Mortas:" + Statistics.instance().getKilledCells()
+						"Criadas:" + Statistics.instance().getCreatedCells()
+								+ " Mortas:"
+								+ Statistics.instance().getKilledCells()
 								+ " Vivas:"
 								+ Statistics.instance().getRevivedCells(),
 						Toast.LENGTH_SHORT).show();

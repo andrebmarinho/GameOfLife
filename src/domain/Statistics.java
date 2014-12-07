@@ -15,10 +15,12 @@ public class Statistics {
 	private static Statistics instance;
 	private int revivedCells;
 	private int killedCells;
+	private int createdCells;
 	
 	private Statistics() {
 		revivedCells = 0;
 		killedCells = 0;
+		createdCells = 0;
 	}
 	
 	public static synchronized Statistics instance() {
@@ -47,6 +49,14 @@ public class Statistics {
 
 	public void recordKill() {
 		this.killedCells++;
+	}
+	
+	public int getCreatedCells() {
+		return createdCells;
+	}
+
+	public void recordCreatedCells() {
+		this.createdCells++;
 	}
 	
 	//TODO: mudar o display para a view.

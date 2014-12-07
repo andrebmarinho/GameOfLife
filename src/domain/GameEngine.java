@@ -79,8 +79,9 @@ public class GameEngine {
 	 * @throws InvalidParameterException caso a posicao (i, j) nao seja valida.
 	 */
 	public void makeCellAlive(int i, int j) throws InvalidParameterException {
-		if(validPosition(i, j)) {
+		if((validPosition(i, j)) && (cells[i][j].getStatus() != Status.Alive)) {
 			cells[i][j].revive();
+			Statistics.instance().recordCreatedCells();
 		} else {
 			new InvalidParameterException("Invalid position (" + i + ", " + j + ")" );
 		}
