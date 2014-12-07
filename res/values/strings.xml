@@ -3,10 +3,11 @@
     <string name="app_name">Game of Life</string>
     <string name="desc"/>
     <string name="auto">Automatico</string>
-    <string name="pause">Pause</string>
+    <string name="pause">Pausar</string>
     <string name="prox">Proximo</string>
-    <string name="undo">Undo</string>
-    <string name="redo">Redo</string>
-
+    <string name="undo">Desfazer</string>
+    <string name="redo">Refazer</string>
+	<string name="close">Fechar</string>
+	<string name="show_statistics">Mostrar estatísticas</string>
 </resources>
 

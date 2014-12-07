@@ -1,8 +1,6 @@
 package domain;
 
 public class Main {
-
-	Statistics statistics;
 	GameController controller;
 	GameEngine engine;
 	
@@ -24,14 +22,8 @@ public class Main {
 
 	public void setUp() {
 		controller = new GameController();		
-		statistics = new Statistics();		
-		engine = new GameEngine(10, 10, statistics);
+		engine = new GameEngine(10, 10);
 		controller.setEngine(engine);
-		controller.setStatistics(statistics);
-	}
-
-	public Statistics getStatistics() {
-		return statistics;
 	}
 
 	public GameController getController() {

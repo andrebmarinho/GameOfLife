@@ -1,8 +1,6 @@
 package domain;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Representa um ambiente (environment) do jogo GameOfLife.
@@ -21,7 +19,6 @@ public class GameEngine {
 	private int width;
 	private Cell[][] cells;
 	private Cell[][] oldCells;
-	private Statistics statistics;
 
 	/**
 	 * Construtor da classe Environment.
@@ -31,7 +28,7 @@ public class GameEngine {
 	 * @param width
 	 *            dimentsao horizontal do ambiente
 	 */
-	public GameEngine(int height, int width, Statistics statistics) {
+	public GameEngine(int height, int width) {
 		this.height = height;
 		this.width = width;
 
@@ -44,8 +41,6 @@ public class GameEngine {
 				oldCells[i][j] = new Cell();
 			}
 		}
-		
-		this.statistics = statistics;
 	}
 
 	/**
@@ -61,27 +56,17 @@ public class GameEngine {
 	 * c) em todos os outros casos a celula morre ou continua morta.
 	 */
 	public void nextGeneration() {
-		List<Cell> mustRevive = new ArrayList<Cell>();
-		List<Cell> mustKill = new ArrayList<Cell>();
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if (shouldRevive(i, j)) {
-					mustRevive.add(cells[i][j]);
+					cells[i][j].revive();
+					Statistics.instance().recordRevive();
 				} 
-				else if ((!shouldKeepAlive(i, j)) && cells[i][j].isAlive()) {
-					mustKill.add(cells[i][j]);
+				else if ((!shouldKeepAlive(i, j)) && (cells[i][j].isAlive())) {
+					cells[i][j].kill();
+					Statistics.instance().recordKill();
 				}
 			}
-		}
-		
-		for (Cell cell : mustRevive) {
-			cell.revive();
-			statistics.recordRevive();
-		}
-		
-		for (Cell cell : mustKill) {
-			cell.kill();
-			statistics.recordKill();
 		}
 	}
 	
@@ -94,9 +79,9 @@ public class GameEngine {
 	 * @throws InvalidParameterException caso a posicao (i, j) nao seja valida.
 	 */
 	public void makeCellAlive(int i, int j) throws InvalidParameterException {
-		if(validPosition(i, j)) {
+		if((validPosition(i, j)) && (cells[i][j].getStatus() != Status.Alive)) {
 			cells[i][j].revive();
-			statistics.recordRevive();
+			Statistics.instance().recordCreatedCells();
 		} else {
 			new InvalidParameterException("Invalid position (" + i + ", " + j + ")" );
 		}
