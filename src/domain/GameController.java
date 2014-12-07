@@ -13,7 +13,6 @@ public class GameController {
 
 	private GameEngine engine;
 	private Statistics statistics;
-	private boolean auto = false;	
 	
 	public GameEngine getEngine() {
 		return engine;
@@ -65,16 +64,8 @@ public class GameController {
 					oldCells[i][j].setStatus(cells[i][j].getStatus());
 					engine.setOldCells(oldCells);
 				}				
-			}		
+			}
 		
-	}
-
-	public boolean isAuto() {
-		return auto;
-	}
-
-	public void setAuto(boolean auto) {
-		this.auto = auto;
 	}
 	
 }

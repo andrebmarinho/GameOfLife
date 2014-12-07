@@ -26,8 +26,8 @@ public class MainActivity extends Activity {
 
 	Status status;
 	GridView gridView;
-	ImgAdapter adapter;
-	protected GameController controller = null;
+	protected static ImgAdapter adapter;
+	protected static GameController controller = null;
 	Buttons buttons;
 	Thread auto;
 	
@@ -55,8 +55,7 @@ public class MainActivity extends Activity {
 	       }
 		
 	   });
-	   if(controller != null)
-		   auto = new Thread(new AutoRun());
+	   auto = new Thread(new AutoRun());
 	       
 	}
 	
@@ -91,6 +90,8 @@ public class MainActivity extends Activity {
 			    case R.id.b_pause:
 			    	Toast.makeText(MainActivity.this, "Pause",
 							Toast.LENGTH_SHORT).show();
+			    	//((AutoRun) auto).turnOff();
+			    	auto.interrupt();
 			    	break;
 			    case R.id.b_play:
 			    	Toast.makeText(MainActivity.this, "Play",
