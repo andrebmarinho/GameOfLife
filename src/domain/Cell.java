@@ -4,19 +4,23 @@ public class Cell {
 	private Status status = Status.Empty; 
 
 	public boolean isAlive() {
-		return status == Status.Alive;
+		return getStatus() == Status.Alive;
 	}
 
 	public void kill() {
-		this.status = Status.Dead;
+		this.setStatus(Status.Dead);
 	}
 	
 	public void revive() {
-		this.status = Status.Alive;
+		this.setStatus(Status.Alive);
 	}
 
 	public Status getStatus() {
 		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}	
 	
 }

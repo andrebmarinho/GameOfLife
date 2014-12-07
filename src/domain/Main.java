@@ -20,7 +20,6 @@ public class Main {
 	
 	public void startGame() {
 		setUp();
-		controller.start();
 	}
 
 	public void setUp() {

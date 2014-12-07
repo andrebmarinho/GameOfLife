@@ -20,6 +20,7 @@ public class GameEngine {
 	private int height;
 	private int width;
 	private Cell[][] cells;
+	private Cell[][] oldCells;
 	private Statistics statistics;
 
 	/**
@@ -35,10 +36,12 @@ public class GameEngine {
 		this.width = width;
 
 		cells = new Cell[height][width];
+		oldCells = new Cell[10][10];
 
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				cells[i][j] = new Cell();
+				oldCells[i][j] = new Cell();
 			}
 		}
 		
@@ -94,10 +97,7 @@ public class GameEngine {
 		if(validPosition(i, j)) {
 			cells[i][j].revive();
 			statistics.recordRevive();
-			int position = ImgSwitch.instance().convertCoordinatesToPosition(i, j);
-			ImgSwitch.instance().setImgArray(Status.Alive, position);			
-		}
-		else {
+		} else {
 			new InvalidParameterException("Invalid position (" + i + ", " + j + ")" );
 		}
 	}
@@ -194,6 +194,14 @@ public class GameEngine {
 
 	public void setWidth(int width) {
 		this.width = width;
+	}
+
+	public Cell[][] getOldCells() {
+		return oldCells;
+	}
+
+	public void setOldCells(Cell[][] oldCells) {
+		this.oldCells = oldCells;
 	}
 	
 }

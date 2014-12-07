@@ -12,10 +12,8 @@ import java.security.InvalidParameterException;
 public class GameController {
 
 	private GameEngine engine;
-	private boolean update;
 	private Statistics statistics;
-	//private boolean pause = false;
-	//private boolean auto = true;	
+	private boolean auto = false;	
 	
 	public GameEngine getEngine() {
 		return engine;
@@ -30,8 +28,6 @@ public class GameController {
 	}
 	
 	public void start() {
-		update = false;
-		nextGeneration();
 	}
 	
 	public void halt() {
@@ -45,38 +41,40 @@ public class GameController {
 	public void makeCellAlive(int i, int j) {
 		try {
 			engine.makeCellAlive(i, j);
+			changeCellsStatus();
 		} catch(InvalidParameterException e) {
 			//TODO:tratar aqui 
 		}
 	}
 	
 	public void nextGeneration() {
-		update = false;
 		engine.nextGeneration();
-		changeCellsStatus(engine.getCells());
-	}
-
-	public void setUpdate(boolean update) {
-		this.update = update;
-	}
-	
-	public boolean getUpdate() {
-		return update;
+		changeCellsStatus();
 	}
 			
-	public void changeCellsStatus(Cell[][] oldCells){
+	public void changeCellsStatus(){
 		
 		int position;
+		Cell[][] oldCells = engine.getOldCells();
 		Cell[][] cells = engine.getCells();
 		for(int i = 0; i < 10; i++)
 			for(int j = 0; j < 10; j++){				
 				if(oldCells[i][j].getStatus() != cells[i][j].getStatus()){
 					position = ImgSwitch.instance().convertCoordinatesToPosition(i, j);
 					ImgSwitch.instance().setImgArray(cells[i][j].getStatus(), position);
-					update = true;
+					oldCells[i][j].setStatus(cells[i][j].getStatus());
+					engine.setOldCells(oldCells);
 				}				
 			}		
 		
+	}
+
+	public boolean isAuto() {
+		return auto;
+	}
+
+	public void setAuto(boolean auto) {
+		this.auto = auto;
 	}
 	
 }
