@@ -1,6 +1,5 @@
 package br.unb.cic.gameoflife.domain;
 
-
 public class Statistics {
 	private static Statistics instance;
 	private int revivedCells;
@@ -18,10 +17,15 @@ public class Statistics {
 		return instance;
 	}
 
+	public void setStatistics(int revivedCells, int killedCells,
+			int createdCells) {
+		this.revivedCells = revivedCells;
+		this.killedCells = killedCells;
+		this.createdCells = createdCells;
+	}
+
 	public void reset() {
-		this.revivedCells = 0;
-		this.killedCells = 0;
-		this.createdCells = 0;
+		setStatistics(0, 0, 0);
 	}
 
 	public int getRevivedCells() {

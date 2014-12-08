@@ -112,6 +112,9 @@ public class MainActivity extends Activity {
 			case R.id.b_undo:
 				Toast.makeText(MainActivity.this, "Undo", Toast.LENGTH_SHORT)
 						.show();
+				controller.undoGeneration();
+				updateView();
+				
 				break;
 
 			case R.id.b_redo:

@@ -126,6 +126,22 @@ public class GameEngine {
 		return false;
 	}
 
+	public void setCells(Cell cells[][]) {
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				this.cells[i][j] = new Cell(cells[i][j].getStatus());
+			}
+		}
+	}
+
+	public void setOldCells(Cell cells[][]) {
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				this.oldCells[i][j] = new Cell(cells[i][j].getStatus());
+			}
+		}
+	}
+	
 	public Cell[][] getCells() {
 		return cells;
 	}
