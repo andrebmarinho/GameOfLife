@@ -11,10 +11,12 @@ import java.security.InvalidParameterException;
 public class GameController {
 	private GameEngine engine;
 	private Caretaker undoStack;
+	private Caretaker redoStack;
 	
 	public GameController(int height, int width) {
 		this.engine = new GameEngine(height, width);
 		undoStack = new Caretaker();
+		redoStack = new Caretaker();
 	}
 
 	public void makeCellAlive(int i, int j) {
@@ -32,6 +34,7 @@ public class GameController {
 				engine.getHeight(), engine.getWidth(), s.getRevivedCells(),
 				s.getKilledCells(), s.getCreatedCells());
 		undoStack.save(Originator.instance());
+		redoStack.undo(Originator.instance());
 		engine.nextGeneration();
 		updateCellsStatus();
 	}
@@ -41,7 +44,23 @@ public class GameController {
 			return;
 		}
 		
+		redoStack.save(Originator.instance());
 		undoStack.undo(Originator.instance());
+		Statistics s = Statistics.instance();
+		Originator origin = Originator.instance();
+		s.setStatistics(origin.getRevivedCells(), origin.getKilledCells(),
+				origin.getCreatedCells());
+		engine.setCells(origin.getCells());
+		engine.setOldCells(origin.getCells());
+		updateCellsStatus();
+	}
+	
+	public void redoGeneration() {
+		if (redoStack.isEmpty()) {
+			return;
+		}
+		
+		redoStack.undo(Originator.instance());
 		Statistics s = Statistics.instance();
 		Originator origin = Originator.instance();
 		s.setStatistics(origin.getRevivedCells(), origin.getKilledCells(),

@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import br.unb.cic.gameoflife.R;
 import br.unb.cic.gameoflife.domain.AutoRun;
@@ -84,8 +83,6 @@ public class MainActivity extends Activity {
 				break;
 
 			case R.id.b_pause:
-				Toast.makeText(MainActivity.this, "Pause", Toast.LENGTH_SHORT)
-						.show();
 				if (auto != null) {
 					auto.interrupt();
 					auto = null;
@@ -93,9 +90,6 @@ public class MainActivity extends Activity {
 				break;
 
 			case R.id.b_play:
-				Toast.makeText(MainActivity.this, "Play", Toast.LENGTH_SHORT)
-						.show();
-
 				if (auto == null) {
 					auto = new Thread(new AutoRun());
 					auto.start();
@@ -103,23 +97,19 @@ public class MainActivity extends Activity {
 				break;
 
 			case R.id.b_next:
-				Toast.makeText(MainActivity.this, "Next", Toast.LENGTH_SHORT)
-						.show();
 				controller.nextGeneration();
 				updateView();
 				break;
 
 			case R.id.b_undo:
-				Toast.makeText(MainActivity.this, "Undo", Toast.LENGTH_SHORT)
-						.show();
 				controller.undoGeneration();
 				updateView();
 				
 				break;
 
 			case R.id.b_redo:
-				Toast.makeText(MainActivity.this, "Redo", Toast.LENGTH_SHORT)
-						.show();
+				controller.redoGeneration();
+				updateView();
 				break;
 			}
 		}

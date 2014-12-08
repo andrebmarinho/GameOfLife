@@ -15,6 +15,9 @@ public class Caretaker {
     }
      
     public void undo(Originator originator){
+    	if (isEmpty()) {
+    		return;
+    	}
         originator.undoToLastSave(list.remove(0));
     }
     
