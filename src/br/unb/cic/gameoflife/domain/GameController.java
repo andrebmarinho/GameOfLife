@@ -1,4 +1,4 @@
-package domain;
+package br.unb.cic.gameoflife.domain;
 
 import java.security.InvalidParameterException;
 

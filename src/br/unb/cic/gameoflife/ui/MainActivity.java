@@ -1,16 +1,5 @@
-package ui;
+package br.unb.cic.gameoflife.ui;
 
-//Classe Main - � a atividade respons�vel pela "View" no padr�o MVC.
-
-import com.example.gameoflife.R;
-
-import domain.AutoRun;
-import domain.Buttons;
-import domain.ImgAdapter;
-import domain.ImgSwitch;
-import domain.Statistics;
-import domain.Status;
-import domain.GameController;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -20,10 +9,19 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import br.unb.cic.gameoflife.R;
+import br.unb.cic.gameoflife.domain.AutoRun;
+import br.unb.cic.gameoflife.domain.Buttons;
+import br.unb.cic.gameoflife.domain.GameController;
+import br.unb.cic.gameoflife.domain.ImgAdapter;
+import br.unb.cic.gameoflife.domain.ImgSwitch;
+import br.unb.cic.gameoflife.domain.Statistics;
+import br.unb.cic.gameoflife.domain.Status;
 
 public class MainActivity extends Activity {
 	Status status;

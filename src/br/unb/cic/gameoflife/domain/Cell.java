@@ -1,4 +1,4 @@
-package domain;
+package br.unb.cic.gameoflife.domain;
 
 public class Cell {
 	private Status status = Status.Dead;

@@ -1,6 +1,5 @@
-package domain;
+package br.unb.cic.gameoflife.domain;
 
-import domain.Statistics;
 
 public class Statistics {
 	private static Statistics instance;

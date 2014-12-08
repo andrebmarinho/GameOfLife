@@ -1,8 +1,8 @@
-package domain;
+package br.unb.cic.gameoflife.domain;
 
 //Singleton respons�vel pelas mudan�as das imagens.
 
-import com.example.gameoflife.R;
+import br.unb.cic.gameoflife.R;
 
 public class ImgSwitch {
 	private static Integer[] imgArray = new Integer[100];

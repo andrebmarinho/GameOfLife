@@ -1,4 +1,4 @@
-package domain;
+package br.unb.cic.gameoflife.domain;
 
 //Implementa��o baseada no c�digo dispon�vel em:
 // http://developer.android.com/guide/topics/ui/layout/gridview.html

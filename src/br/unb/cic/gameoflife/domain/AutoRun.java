@@ -1,6 +1,6 @@
-package domain;
+package br.unb.cic.gameoflife.domain;
 
-import ui.MainActivity;
+import br.unb.cic.gameoflife.ui.MainActivity;
 
 public class AutoRun extends MainActivity implements Runnable {
 	@Override
