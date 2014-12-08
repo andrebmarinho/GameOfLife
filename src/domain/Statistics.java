@@ -2,39 +2,29 @@ package domain;
 
 import domain.Statistics;
 
-/**
- * Essa tambem eh uma classe com baixa coesao, 
- * pois mustura caracteristicas de Model (as propriedades) 
- * com caracteristicas de view (metodo display())
- * 
- * Nao eh uma boa implementacao.
- * 
- * @author rodrigobonifacio
- */
 public class Statistics {
 	private static Statistics instance;
 	private int revivedCells;
 	private int killedCells;
 	private int createdCells;
-	
+
 	private Statistics() {
-		revivedCells = 0;
-		killedCells = 0;
-		createdCells = 0;
+		reset();
 	}
-	
+
 	public static synchronized Statistics instance() {
 		if (instance == null) {
 			instance = new Statistics();
 		}
 		return instance;
 	}
-	
-	public void setStatistics(int revivedCells, int killedCells){
-		this.revivedCells = revivedCells;
-		this.killedCells = killedCells;
+
+	public void reset() {
+		this.revivedCells = 0;
+		this.killedCells = 0;
+		this.createdCells = 0;
 	}
-	
+
 	public int getRevivedCells() {
 		return revivedCells;
 	}
@@ -50,7 +40,7 @@ public class Statistics {
 	public void recordKill() {
 		this.killedCells++;
 	}
-	
+
 	public int getCreatedCells() {
 		return createdCells;
 	}
@@ -58,10 +48,4 @@ public class Statistics {
 	public void recordCreatedCells() {
 		this.createdCells++;
 	}
-
-	public void setCreatedCells(int createdCells) {
-		this.createdCells = createdCells;
-	}
-	
 }
-

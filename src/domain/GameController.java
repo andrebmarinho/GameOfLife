@@ -11,12 +11,8 @@ import java.security.InvalidParameterException;
 public class GameController {
 	private GameEngine engine;
 
-	public GameEngine getEngine() {
-		return engine;
-	}
-
-	public void setEngine(GameEngine engine) {
-		this.engine = engine;
+	public GameController(int height, int width) {
+		this.engine = new GameEngine(height, width);
 	}
 
 	public void makeCellAlive(int i, int j) {
@@ -50,5 +46,10 @@ public class GameController {
 			}
 		}
 	}
-	
+
+	public void resetGame() {
+		this.engine = null;
+		this.engine = new GameEngine(10, 10);
+		Statistics.instance().reset();
+	}
 }

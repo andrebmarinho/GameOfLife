@@ -8,7 +8,6 @@ import domain.AutoRun;
 import domain.Buttons;
 import domain.ImgAdapter;
 import domain.ImgSwitch;
-import domain.Main;
 import domain.Statistics;
 import domain.Status;
 import domain.GameController;
@@ -27,17 +26,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-
 	Status status;
 	GridView gridView;
 	protected static ImgAdapter adapter;
-	protected static GameController controller = null;
+	protected static GameController controller;
 	Buttons buttons;
 	Thread auto = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_game_view);
 
@@ -47,8 +44,7 @@ public class MainActivity extends Activity {
 		adapter = new ImgAdapter(this);
 		gridView.setAdapter(adapter);
 
-		Main.instance().startGame();
-		controller = Main.instance().getController();
+		controller = new GameController(10, 10);
 
 		gridView.setOnTouchListener(new OnTouchListener() {
 			@SuppressLint("ClickableViewAccessibility")
@@ -66,41 +62,38 @@ public class MainActivity extends Activity {
 	}
 
 	private void setButtons() {
-		buttons = new Buttons((ImageButton) findViewById(R.id.b_pause),
+		buttons = new Buttons((Button) findViewById(R.id.b_stats),
+				(ImageButton) findViewById(R.id.b_clear),
+				(ImageButton) findViewById(R.id.b_pause),
 				(ImageButton) findViewById(R.id.b_play),
 				(ImageButton) findViewById(R.id.b_next),
 				(ImageButton) findViewById(R.id.b_undo),
 				(ImageButton) findViewById(R.id.b_redo));
 
-		buttons.getbPause().setOnClickListener(onClickListener);
-		buttons.getbAuto().setOnClickListener(onClickListener);
-		buttons.getbNext().setOnClickListener(onClickListener);
-		buttons.getbUndo().setOnClickListener(onClickListener);
-		buttons.getbRedo().setOnClickListener(onClickListener);
-
-		Button buttonStatistics = (Button) findViewById(R.id.ButtonStatistics);
-		buttonStatistics.setOnClickListener(onClickListener);
+		buttons.setListeners(onClickListener);
 	}
 
 	private OnClickListener onClickListener = new OnClickListener() {
 		@Override
 		public void onClick(final View v) {
 			switch (v.getId()) {
-			case R.id.b_undo:
-				Toast.makeText(MainActivity.this, "Undo", Toast.LENGTH_SHORT)
-						.show();
+			case R.id.b_stats:
+				showPopup();
 				break;
 
-			case R.id.b_redo:
-				Toast.makeText(MainActivity.this, "Redo", Toast.LENGTH_SHORT)
-						.show();
+			case R.id.b_clear:
+				controller.resetGame();
+				ImgSwitch.instance().startOrRestartArray();
+				updateView();
 				break;
 
 			case R.id.b_pause:
 				Toast.makeText(MainActivity.this, "Pause", Toast.LENGTH_SHORT)
 						.show();
-				auto.interrupt();
-				auto = null;
+				if (auto != null) {
+					auto.interrupt();
+					auto = null;
+				}
 				break;
 
 			case R.id.b_play:
@@ -120,12 +113,17 @@ public class MainActivity extends Activity {
 				updateView();
 				break;
 
-			case R.id.ButtonStatistics:
-				showPopup();
+			case R.id.b_undo:
+				Toast.makeText(MainActivity.this, "Undo", Toast.LENGTH_SHORT)
+						.show();
+				break;
+
+			case R.id.b_redo:
+				Toast.makeText(MainActivity.this, "Redo", Toast.LENGTH_SHORT)
+						.show();
 				break;
 			}
 		}
-
 	};
 
 	protected void updateView() {
@@ -141,9 +139,9 @@ public class MainActivity extends Activity {
 		TextView text = (TextView) dialog.findViewById(R.id.TextViewPopup);
 		text.setText("Criadas:" + Statistics.instance().getCreatedCells()
 				+ "\nMortas:" + Statistics.instance().getKilledCells()
-				+ "\nVivas:" + Statistics.instance().getRevivedCells());
+				+ "\nRevividas:" + Statistics.instance().getRevivedCells());
 
-		Button button = (Button) dialog.findViewById(R.id.ButtonClosePopup);
+		Button button = (Button) dialog.findViewById(R.id.b_close_popup);
 		button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

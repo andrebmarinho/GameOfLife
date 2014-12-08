@@ -1,7 +1,7 @@
 package domain;
 
 public class Cell {
-	private Status status = Status.Dead; 
+	private Status status = Status.Dead;
 
 	public boolean isAlive() {
 		return getStatus() == Status.Alive;
@@ -10,7 +10,7 @@ public class Cell {
 	public void kill() {
 		this.setStatus(Status.Dead);
 	}
-	
+
 	public void revive() {
 		this.setStatus(Status.Alive);
 	}
@@ -21,7 +21,5 @@ public class Cell {
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}	
-	
+	}
 }
-

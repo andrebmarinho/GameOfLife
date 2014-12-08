@@ -1,8 +1,7 @@
 package domain;
 
-//Implementação baseada no código disponível em:
+//Implementaï¿½ï¿½o baseada no cï¿½digo disponï¿½vel em:
 // http://developer.android.com/guide/topics/ui/layout/gridview.html
-
 
 import android.content.Context;
 import android.view.View;
@@ -12,26 +11,26 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 public class ImgAdapter extends BaseAdapter {
-    private Context context;
-    private Integer[] arrayDeImgs = ImgSwitch.instance().getImgArray();
-    
-    public ImgAdapter(Context context) {
-        this.context = context;
-    }
+	private Context context;
+	private Integer[] arrayDeImgs = ImgSwitch.instance().getImgArray();
 
-    //  cria 1 ImageView para cada item que o adaptador chama.
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
-        if (convertView == null) { 
-            imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-        } else {
-            imageView = (ImageView) convertView;
-        }
+	public ImgAdapter(Context context) {
+		this.context = context;
+	}
 
-        imageView.setImageResource(arrayDeImgs[position]);
-        return imageView;
-    }
+	// cria 1 ImageView para cada item que o adaptador chama.
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ImageView imageView;
+		if (convertView == null) {
+			imageView = new ImageView(context);
+			imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+		} else {
+			imageView = (ImageView) convertView;
+		}
+
+		imageView.setImageResource(arrayDeImgs[position]);
+		return imageView;
+	}
 
 	@Override
 	public Object getItem(int position) {
