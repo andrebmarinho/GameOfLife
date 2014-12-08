@@ -18,37 +18,32 @@ public class GameController {
 	public void makeCellAlive(int i, int j) {
 		try {
 			engine.makeCellAlive(i, j);
-			changeCellsStatus();
+			updateCellsStatus();
 		} catch (InvalidParameterException e) {
-			// TODO:tratar aqui
+			throw new RuntimeException("Célula inexistente");
 		}
 	}
 
 	public void nextGeneration() {
 		engine.nextGeneration();
-		changeCellsStatus();
+		updateCellsStatus();
 	}
 
-	public void changeCellsStatus() {
+	public void updateCellsStatus() {
 		int position;
-		Cell[][] oldCells = engine.getOldCells();
 		Cell[][] cells = engine.getCells();
+
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (oldCells[i][j].getStatus() != cells[i][j].getStatus()) {
-					position = ImgSwitch.instance()
-							.convertCoordinatesToPosition(i, j);
-					ImgSwitch.instance().setImgArray(cells[i][j].getStatus(),
-							position);
-					oldCells[i][j].setStatus(cells[i][j].getStatus());
-					engine.setOldCells(oldCells);
-				}
+				position = ImgSwitch.instance().convertCoordinatesToPosition(i,
+						j);
+				ImgSwitch.instance().setImgArray(cells[i][j].getStatus(),
+						position);
 			}
 		}
 	}
 
 	public void resetGame() {
-		this.engine = null;
 		this.engine = new GameEngine(10, 10);
 		Statistics.instance().reset();
 	}

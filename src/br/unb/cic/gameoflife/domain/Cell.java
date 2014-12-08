@@ -1,8 +1,15 @@
 package br.unb.cic.gameoflife.domain;
 
 public class Cell {
-	private Status status = Status.Dead;
+	private Status status;
 
+	public Cell() {
+		this.status = Status.Dead;
+	}
+	
+	public Cell(Status status) {
+		this.status = status;
+	}
 	public boolean isAlive() {
 		return getStatus() == Status.Alive;
 	}

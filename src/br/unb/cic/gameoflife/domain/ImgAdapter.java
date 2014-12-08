@@ -1,6 +1,6 @@
 package br.unb.cic.gameoflife.domain;
 
-//Implementa��o baseada no c�digo dispon�vel em:
+//Implementação baseada no código disponível em:
 // http://developer.android.com/guide/topics/ui/layout/gridview.html
 
 import android.content.Context;

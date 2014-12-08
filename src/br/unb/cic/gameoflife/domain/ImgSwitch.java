@@ -1,11 +1,13 @@
 package br.unb.cic.gameoflife.domain;
 
-//Singleton respons�vel pelas mudan�as das imagens.
+//Singleton responsável pelas mudanças das imagens.
 
 import br.unb.cic.gameoflife.R;
 
 public class ImgSwitch {
-	private static Integer[] imgArray = new Integer[100];
+	private static int height;
+	private static int width;
+	private static Integer[] imgArray;
 	private static ImgSwitch instance;
 
 	public static synchronized ImgSwitch instance() {
@@ -17,11 +19,14 @@ public class ImgSwitch {
 
 	// Início com mapa zerado.
 	private ImgSwitch() {
+		height = 10;
+		width = 10;
+		imgArray = new Integer[height * width];
 		startOrRestartArray();
 	}
 
 	public void startOrRestartArray() {
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < height * width; i++)
 			imgArray[i] = R.drawable.dead;
 	}
 
@@ -41,14 +46,14 @@ public class ImgSwitch {
 	}
 
 	public int convertCoordinatesToPosition(int i, int j) {
-		return (i * 10 + (j));
+		return (i * width + (j));
 	}
 
 	public int[] convertPositionToCoordinates(int pos) {
 		int[] coord = new int[2];
 
-		coord[0] = (int) (pos / 10);
-		coord[1] = pos % 10;
+		coord[0] = (int) (pos / height);
+		coord[1] = pos % width;
 
 		return coord;
 	}

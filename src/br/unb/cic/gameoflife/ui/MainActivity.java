@@ -21,10 +21,8 @@ import br.unb.cic.gameoflife.domain.GameController;
 import br.unb.cic.gameoflife.domain.ImgAdapter;
 import br.unb.cic.gameoflife.domain.ImgSwitch;
 import br.unb.cic.gameoflife.domain.Statistics;
-import br.unb.cic.gameoflife.domain.Status;
 
 public class MainActivity extends Activity {
-	Status status;
 	GridView gridView;
 	protected static ImgAdapter adapter;
 	protected static GameController controller;
