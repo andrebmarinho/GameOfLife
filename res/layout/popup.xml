@@ -14,7 +14,7 @@
 	    android:textAppearance="?android:attr/textAppearanceLarge" />
 
 	<Button
-	    android:id="@+id/ButtonClosePopup"
+	    android:id="@+id/b_close_popup"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/TextViewPopup"

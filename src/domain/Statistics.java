@@ -58,16 +58,10 @@ public class Statistics {
 	public void recordCreatedCells() {
 		this.createdCells++;
 	}
-	
-	//TODO: mudar o display para a view.
-	public void display() {
-		System.out.println("=================================");
-		System.out.println("           Statistics            ");
-		System.out.println("=================================");
-		System.out.println("Revived cells: " + revivedCells);
-		System.out.println("Killed cells: " + killedCells);
-		System.out.println("=================================");
-	}
 
+	public void setCreatedCells(int createdCells) {
+		this.createdCells = createdCells;
+	}
+	
 }
 

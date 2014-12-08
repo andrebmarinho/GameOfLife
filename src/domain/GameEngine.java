@@ -142,13 +142,47 @@ public class GameEngine {
 	 */
 	private int numberOfNeighborhoodAliveCells(int i, int j) {
 		int alive = 0;
-		for (int a = i - 1; a <= i + 1; a++) {
-			for (int b = j - 1; b <= j + 1; b++) {
-				if (validPosition(a, b)  && (!(a==i && b == j)) && cells[a][b].isAlive()) {
-					alive++;
+		if( (i-1 >= 0 && j-1 >= 0) && (i+1 <= height-1 && j+1 <= width-1) ){
+			for (int a = i - 1; a <= i + 1; a++) {
+				for (int b = j - 1; b <= j + 1; b++) {
+					if (validPosition(a, b)  && (!(a==i && b == j)) && cells[a][b].isAlive()) {
+						alive++;
+					}
 				}
 			}
-		}
+		} /*else if(i-1 < 0 && j-1 < 0) {
+			for (int a = height-1; a <= i + 1; a++) {
+				if(a == height)
+					a = 0;
+				for (int b = width-1; b <= j + 1; b++) {
+					if(b == width)
+						b = 0;
+					if (validPosition(a, b)  && (!(a==i && b == j)) && cells[a][b].isAlive()) {
+						alive++;
+					}
+				}
+			}
+		} else if(i-1 < 0 && j-1 >= 0) {
+			for (int a = height-1; a <= i + 1; a++) {
+				if(a == height)
+					a = 0;
+				for (int b = j-1; b <= j + 1; b++) {
+					if (validPosition(a, b)  && (!(a==i && b == j)) && cells[a][b].isAlive()) {
+						alive++;
+					}
+				}
+			}
+		} else if(i-1 >= 0 && j-1 < 0) {
+			for (int a = i-1; a <= i + 1; a++) {
+				for (int b = width-1; b <= j + 1; b++) {
+					if(b == width)
+						b = 0;
+					if (validPosition(a, b)  && (!(a==i && b == j)) && cells[a][b].isAlive()) {
+						alive++;
+					}
+				}
+			}
+		}*/
 		return alive;
 	}
 
@@ -156,7 +190,11 @@ public class GameEngine {
 	 * Verifica se uma posicao (a, b) referencia uma celula valida no tabuleiro.
 	 */
 	private boolean validPosition(int a, int b) {
-		return a >= 0 && a < height && b >= 0 && b < width;
+		boolean ret = false;
+		if(a >= 0 && a < height && b >= 0 && b < width)
+				ret = true;
+		
+		return ret;
 	}
 
 	/* Metodos de acesso as propriedades height e width */

@@ -19,17 +19,6 @@ public class GameController {
 		this.engine = engine;
 	}
 
-	public void start() {
-	}
-
-	public void halt() {
-		// oops, nao muito legal fazer sysout na classe Controller
-		// System.out.println("\n \n");
-		// TODO: display de estat�sticas
-		Statistics.instance().display();
-		System.exit(0);
-	}
-
 	public void makeCellAlive(int i, int j) {
 		try {
 			engine.makeCellAlive(i, j);
@@ -61,4 +50,5 @@ public class GameController {
 			}
 		}
 	}
+	
 }

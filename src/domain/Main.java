@@ -19,6 +19,15 @@ public class Main {
 	public void startGame() {
 		setUp();
 	}
+	
+	public void restartGame() {
+		Statistics.instance().setStatistics(0, 0);
+		Statistics.instance().setCreatedCells(0);
+		controller = null;
+		engine = null;
+		setUp();
+		ImgSwitch.instance().startOrRestartArray();
+	}
 
 	public void setUp() {
 		controller = new GameController();		

@@ -20,11 +20,14 @@ public class ImgSwitch {
 	
 	//Início com mapa zerado.
 	private ImgSwitch() {
-		for(int i = 0; i < 100; i++)
-			imgArray[i] = R.drawable.empty;
-		
+		startOrRestartArray();
 	}
 	
+	public void startOrRestartArray() {
+		for(int i = 0; i < 100; i++)
+			imgArray[i] = R.drawable.dead;
+	}
+
 	public void setImgArray(Status status, int position){
 				
 		switch(status){
@@ -33,9 +36,6 @@ public class ImgSwitch {
 				break;
 			case Alive:
 				imgArray[position] = R.drawable.alive;
-				break;
-			case Empty:
-				imgArray[position] = R.drawable.empty;
 				break;
 		}
 		

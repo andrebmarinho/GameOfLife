@@ -1,7 +1,7 @@
 package domain;
 
 public class Cell {
-	private Status status = Status.Empty; 
+	private Status status = Status.Dead; 
 
 	public boolean isAlive() {
 		return getStatus() == Status.Alive;
