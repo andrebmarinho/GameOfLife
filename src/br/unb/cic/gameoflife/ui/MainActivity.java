@@ -78,7 +78,6 @@ public class MainActivity extends Activity {
 				controller.resetGame();
 				ImgSwitch.instance().startOrRestartArray();
 				updateView();
-				break;
 
 			case R.id.b_pause:
 				if (auto != null) {
