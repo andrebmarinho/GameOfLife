@@ -7,6 +7,8 @@ public class GameEngine {
 	private int width;
 	private Cell[][] cells;
 	private Cell[][] oldCells;
+	private Caretaker undoStack;
+	private Caretaker redoStack;
 
 	/**
 	 * Construtor da classe Environment.
@@ -29,6 +31,8 @@ public class GameEngine {
 				oldCells[i][j] = new Cell();
 			}
 		}
+		undoStack = new Caretaker();
+		redoStack = new Caretaker();
 	}
 
 	/**
@@ -44,6 +48,13 @@ public class GameEngine {
 	 * c) em todos os outros casos a celula morre ou continua morta.
 	 */
 	public void nextGeneration() {
+		Statistics s = Statistics.instance();
+		Originator origin = Originator.instance();
+		origin.setOriginator(cells, height, width, s.getRevivedCells(),
+				s.getKilledCells(), s.getCreatedCells());
+		undoStack.save(Originator.instance());
+		redoStack.undo(Originator.instance());
+
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if (shouldLive(i, j)) {
@@ -67,6 +78,39 @@ public class GameEngine {
 		}
 	}
 
+	public void undoGeneration() {
+		if (undoStack.isEmpty()) {
+			return;
+		}
+		
+		Statistics s = Statistics.instance();
+		Originator origin = Originator.instance();
+		origin.setOriginator(cells, height, width, s.getRevivedCells(),
+				s.getKilledCells(), s.getCreatedCells());
+		redoStack.save(origin);
+		undoStack.undo(origin);
+		s.setStatistics(origin.getRevivedCells(), origin.getKilledCells(),
+				origin.getCreatedCells());
+		setCells(origin.getCells());
+		setOldCells(origin.getCells());
+	}
+	
+
+	public void redoGeneration() {
+		if (redoStack.isEmpty()) {
+			return;
+		}
+		
+		Statistics s = Statistics.instance();
+		Originator origin = Originator.instance();
+		undoStack.save(origin);
+		redoStack.undo(origin);
+		s.setStatistics(origin.getRevivedCells(), origin.getKilledCells(),
+				origin.getCreatedCells());
+		setCells(origin.getCells());
+		setOldCells(origin.getCells());
+	}
+	
 	/**
 	 * Torna a celula de posicao (i, j) viva
 	 * 
@@ -144,6 +188,11 @@ public class GameEngine {
 				this.oldCells[i][j] = new Cell(cells[i][j].getStatus());
 			}
 		}
+	}
+	
+	public void clearCaretakers() {
+		undoStack.clear();
+		redoStack.clear();
 	}
 	
 	public Cell[][] getCells() {
