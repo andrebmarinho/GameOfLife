@@ -1,8 +1,9 @@
-package br.unb.cic.gameoflife.domain;
+package br.unb.cic.gameoflife.ui;
 
 //Singleton responsável pelas mudanças das imagens.
 
 import br.unb.cic.gameoflife.R;
+import br.unb.cic.gameoflife.domain.Status;
 
 public class ImgSwitch {
 	private static int height;

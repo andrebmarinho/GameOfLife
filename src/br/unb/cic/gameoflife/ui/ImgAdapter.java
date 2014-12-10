@@ -1,4 +1,4 @@
-package br.unb.cic.gameoflife.domain;
+package br.unb.cic.gameoflife.ui;
 
 //Implementação baseada no código disponível em:
 // http://developer.android.com/guide/topics/ui/layout/gridview.html
