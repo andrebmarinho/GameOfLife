@@ -103,11 +103,15 @@ public class GameEngine {
 
 		for (int a = 0; a < height; a++) {
 			for (int b = 0; b < width; b++) {
-				if ((validPosition(a, b))
-						&& (oldCells[a][b].isAlive())
-						&& (!(a == i && b == j))
-						&& ((a >= i - 1 && a <= i + 1 && b >= j - 1 && b <= j + 1)
-								|| ((a >= i - 1 && a <= i + 1) && ((b == 0 && j == width - 1) || (b == width - 1 && j == 0))) || ((b >= j - 1 && b <= j + 1) && ((a == 0 && i == height - 1) || (a == height - 1 && i == 0))))) {
+				if ((validPosition(a, b)) &&
+						(oldCells[a][b].isAlive()) && (!(a == i && b == j)) &&
+						((a >= i - 1 && a <= i + 1 && b >= j - 1 && b <= j + 1)
+						|| ((a >= i - 1 && a <= i + 1) &&
+						((b == 0 && j == width - 1) ||
+						(b == width - 1 && j == 0))) ||
+						((b >= j - 1 && b <= j + 1) &&
+						((a == 0 && i == height - 1) ||
+						(a == height - 1 && i == 0))))) {
 					alive++;
 				}
 			}

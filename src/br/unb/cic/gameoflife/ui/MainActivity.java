@@ -17,8 +17,6 @@ import br.unb.cic.gameoflife.R;
 import br.unb.cic.gameoflife.domain.AutoRun;
 import br.unb.cic.gameoflife.domain.Buttons;
 import br.unb.cic.gameoflife.domain.GameController;
-import br.unb.cic.gameoflife.domain.ImgAdapter;
-import br.unb.cic.gameoflife.domain.ImgSwitch;
 import br.unb.cic.gameoflife.domain.Statistics;
 
 public class MainActivity extends Activity {
@@ -104,7 +102,6 @@ public class MainActivity extends Activity {
 			case R.id.b_undo:
 				controller.undoGeneration();
 				updateView();
-				
 				break;
 
 			case R.id.b_redo:

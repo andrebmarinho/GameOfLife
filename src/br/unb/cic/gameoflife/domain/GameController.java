@@ -2,6 +2,8 @@ package br.unb.cic.gameoflife.domain;
 
 import java.security.InvalidParameterException;
 
+import br.unb.cic.gameoflife.ui.ImgSwitch;
+
 /**
  * Classe que atua como um controlador do padr�o MVC, separando os componentes
  * da camada de apresentacao e model.
@@ -12,7 +14,7 @@ public class GameController {
 	private GameEngine engine;
 	private Caretaker undoStack;
 	private Caretaker redoStack;
-	
+
 	public GameController(int height, int width) {
 		this.engine = new GameEngine(height, width);
 		undoStack = new Caretaker();
@@ -30,9 +32,10 @@ public class GameController {
 
 	public void nextGeneration() {
 		Statistics s = Statistics.instance();
-		Originator.instance().setOriginator(engine.getCells(),
-				engine.getHeight(), engine.getWidth(), s.getRevivedCells(),
-				s.getKilledCells(), s.getCreatedCells());
+		Originator origin = Originator.instance();
+		origin.setOriginator(engine.getCells(), engine.getHeight(),
+				engine.getWidth(), s.getRevivedCells(), s.getKilledCells(),
+				s.getCreatedCells());
 		undoStack.save(Originator.instance());
 		redoStack.undo(Originator.instance());
 		engine.nextGeneration();
@@ -44,10 +47,13 @@ public class GameController {
 			return;
 		}
 		
-		redoStack.save(Originator.instance());
-		undoStack.undo(Originator.instance());
 		Statistics s = Statistics.instance();
 		Originator origin = Originator.instance();
+		origin.setOriginator(engine.getCells(), engine.getHeight(),
+				engine.getWidth(), s.getRevivedCells(), s.getKilledCells(),
+				s.getCreatedCells());
+		redoStack.save(origin);
+		undoStack.undo(origin);
 		s.setStatistics(origin.getRevivedCells(), origin.getKilledCells(),
 				origin.getCreatedCells());
 		engine.setCells(origin.getCells());
@@ -60,9 +66,10 @@ public class GameController {
 			return;
 		}
 		
-		redoStack.undo(Originator.instance());
 		Statistics s = Statistics.instance();
 		Originator origin = Originator.instance();
+		undoStack.save(origin);
+		redoStack.undo(origin);
 		s.setStatistics(origin.getRevivedCells(), origin.getKilledCells(),
 				origin.getCreatedCells());
 		engine.setCells(origin.getCells());
@@ -74,8 +81,8 @@ public class GameController {
 		int position;
 		Cell[][] cells = engine.getCells();
 
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
+		for (int i = 0; i < engine.getHeight(); i++) {
+			for (int j = 0; j < engine.getWidth(); j++) {
 				position = ImgSwitch.instance().convertCoordinatesToPosition(i,
 						j);
 				ImgSwitch.instance().setImgArray(cells[i][j].getStatus(),
